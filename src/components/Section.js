@@ -1,9 +1,19 @@
 import addImage from "../images/addimage.jpg"
+import React, { useRef } from "react";
 import {
     Input, Button
 } from 'reactstrap';
 
 export function Section() {
+
+    const inputNameRef = useRef(null);
+    const inputEmailRef = useRef(null);
+    const inputNumberRef = useRef(null);
+
+    const handleSubmitButton = () => {
+        alert(inputNameRef.current.value);
+        console
+    };
     return (
         /* <!-- first section start -->
   <!-- naming first column as section --> */
@@ -16,6 +26,7 @@ export function Section() {
                 <Input
                     className="mb-1"
                     type='text'
+                    ref={inputNameRef}
                     placeholder="Name"
                 />
             </>
@@ -23,6 +34,7 @@ export function Section() {
                 <Input
                     className="mb-1"
                     type='email'
+                    ref={inputEmailRef}
                     placeholder="Email"
                 />
             </>
@@ -30,6 +42,7 @@ export function Section() {
                 <Input
                     className="mb-1"
                     type='tel'
+                    ref={inputNumberRef}
                     placeholder="Number"
                 />
             </>
@@ -57,6 +70,7 @@ export function Section() {
             <input type="file" className="mb-1" />
             <div>
                 <Button
+                    onClick={handleSubmitButton}
                     block
                     color="primary"
                 >
