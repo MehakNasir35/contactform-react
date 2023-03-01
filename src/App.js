@@ -6,7 +6,7 @@ import { Main } from './components/Main';
 function App() {
   return (
     <>
-      <NavBar  color='primary' dark={true} expand={true}/>
+      <NavBar color='primary' dark={true} expand={true}/>
       <Main />
     </>
   )

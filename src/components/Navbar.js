@@ -8,14 +8,14 @@ import {
     NavbarText,
 } from 'reactstrap';
 
-export function NavBar(args) {
+export function NavBar(props) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
 
     return (
         <div>
-            <Navbar {...args}>
+            <Navbar {...props}>
                 <NavbarBrand href="/"> <FontAwesomeIcon icon={faAddressCard} /> Cloud Contact</NavbarBrand>
                 <Nav className=" .navbar-light " navbar>
                     <NavbarText  className='me-1' >Hello Sultan Dines</NavbarText>

@@ -35,13 +35,11 @@ export function Aside() {
         // <!-- naming second column as aside --> */}
         <aside className="col-12 col-md-6 col-lg-6">
 
-            <>
                 <Input
                     className="mb-1 mt-2"
                     type='text'
                     placeholder="Filter Contacts..."
                 />
-            </>
 
             {/* cards array map */}
             {cardDetailsArray.map(item => <CardContact key={item.id} name={item.name} email={item.email} number={item.number} type={item.type} imageSource={item.imageSource} btnClass={item.btnClass} />)}

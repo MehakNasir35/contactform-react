@@ -1,6 +1,10 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import {
     Card, CardImg, CardBody, CardTitle, CardText, Button, Row, Col
 } from 'reactstrap';
+import { faEnvelopeOpen, faPhone } from '@fortawesome/free-solid-svg-icons'
+
 
 export function CardContact(props) {
     return (
@@ -13,8 +17,8 @@ export function CardContact(props) {
                                 {props.name}
                             </CardTitle>
                             <CardText>
-                                {props.email} <br />
-                                {props.number}
+                                <FontAwesomeIcon icon={faEnvelopeOpen} /> {props.email} <br />
+                                <FontAwesomeIcon icon={faPhone} />  {props.number}
                             </CardText>
                             <Button color='secondary'>Edit</Button>
                             <Button color='danger'>Delete</Button>
@@ -27,7 +31,6 @@ export function CardContact(props) {
                                 alt="Card image cap"
                                 bottom
                                 src={props.imageSource}
-
                                 width="100%"
                             />
                         </Col>
