@@ -18,7 +18,7 @@ export function NavBar(props) {
             <Navbar {...props}>
                 <NavbarBrand href="/"> <FontAwesomeIcon icon={faAddressCard} /> Cloud Contact</NavbarBrand>
                 <Nav className=" .navbar-light " navbar>
-                    <NavbarText  className='me-1' >Hello Sultan Dines</NavbarText>
+                    <NavbarText className='me-1' >Hello Sultan Dines</NavbarText>
                     <NavbarText > <FontAwesomeIcon icon={faSignOut} /> Logout</NavbarText>
                 </Nav>
             </Navbar>

@@ -1,5 +1,4 @@
 import addImage from "../images/addimage.jpg"
-import { CardContact } from "./CardContact"
 import React, { useState } from "react";
 import pic4 from '../images/pic4.png';
 
@@ -7,25 +6,17 @@ import {
     Input, Button, FormGroup, Label
 } from 'reactstrap';
 
-export function Section() {
-
-    const details ={}
+export function Section(props) {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [number, setPhone] = useState('');
-    const [type, setType] = useState('');
-    const [imageSource, setImage] = useState('');
-    const [btnClass, setButtonClass] = useState('');
-    const [showCard, setShowCard] = useState(false)
+    const [type, setType] = useState('Personal');
+    const [imageSource] = useState(`${pic4}`);
+    const [btnClass, setButtonClass] = useState("primary");
 
     const handleClickEvent = () => {
-        setImage(`${pic4}`);
-        setButtonClass("primary")
-        if (type == "Professional")
-            setButtonClass("success")
-
-        details = {
+        let details = {
             "name": name,
             "email": email,
             "number": number,
@@ -33,12 +24,13 @@ export function Section() {
             "type": type,
             "imageSource": imageSource,
         }
-
-        setShowCard(true)
+        props.handleClickEvent(details)
     }
 
     const typeChange = (e) => {
         setType(e.currentTarget.value);
+        if (e.currentTarget.value === "Professional")
+            setButtonClass("success")
     }
 
     return (
@@ -92,6 +84,7 @@ export function Section() {
                             type="radio"
                             name="radio1"
                             value="Personal"
+                            checked
                             onChange={typeChange}
                         /> Personal
                     </Label>
@@ -113,8 +106,7 @@ export function Section() {
                 </div>
             </form>
 
-            {/* if showcard is true, show card */}
-            {showCard && <CardContact name={details.name} email={email} number={number} type={type} imageSource={imageSource} btnClass={btnClass} />}
+
 
         </section>
     )

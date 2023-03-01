@@ -2,6 +2,8 @@ import { CardContact } from "./CardContact"
 import pic1 from '../images/pic1.png';
 import pic2 from '../images/pic2.png';
 import pic3 from '../images/pic3.png';
+import React, { useEffect, useState } from "react";
+
 import {
     Input
 } from 'reactstrap';
@@ -29,21 +31,32 @@ var cardDetailsArray = [{
     "imageSource": pic3,
 }]
 
-export function Aside() {
+export function Aside(props) {
+
+    const [itemsArray, setItemArray] = useState(cardDetailsArray);
+
+    useEffect(() => {
+        if (props.item) {
+            var newArray = [...itemsArray, props.item]
+            console.log(newArray)
+            console.log(props.item)
+            setItemArray(newArray)
+        }
+    }, [props.item]);
+
     return (
         // <!-- second section start  -->
         // <!-- naming second column as aside --> */}
         <aside className="col-12 col-md-6 col-lg-6">
 
-                <Input
-                    className="mb-1 mt-2"
-                    type='text'
-                    placeholder="Filter Contacts..."
-                />
+            <Input
+                className="mb-1 mt-2"
+                type='text'
+                placeholder="Filter Contacts..."
+            />
 
             {/* cards array map */}
-            {cardDetailsArray.map(item => <CardContact key={item.id} name={item.name} email={item.email} number={item.number} type={item.type} imageSource={item.imageSource} btnClass={item.btnClass} />)}
-
+            {itemsArray.map((item, index) => <CardContact key={index} name={item.name} email={item.email} number={item.number} type={item.type} imageSource={item.imageSource} btnClass={item.btnClass} />)}
 
         </aside>
         // {/* <!-- second section end  --> */}
