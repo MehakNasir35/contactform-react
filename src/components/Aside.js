@@ -38,11 +38,21 @@ export function Aside(props) {
     useEffect(() => {
         if (props.item) {
             var newArray = [...itemsArray, props.item]
-            console.log(newArray)
-            console.log(props.item)
             setItemArray(newArray)
         }
     }, [props.item]);
+
+    useEffect(() => {
+        // fetchUsers API call 
+        fetch('https://dummyjson.com/users/?limit=3&select=id,username,email,phone,gender,image,isDeleted')
+            // after getting users, parse to json 
+            .then(res => res.json())
+            // after parsing result, call set card details function
+            .then(data=> setItemArray(data.users))
+            .catch((error) => {
+                console.log(error)
+            });
+    }, []);
 
     return (
         // <!-- second section start  -->
@@ -56,7 +66,8 @@ export function Aside(props) {
             />
 
             {/* cards array map */}
-            {itemsArray.map((item, index) => <CardContact key={index} name={item.name} email={item.email} number={item.number} type={item.type} imageSource={item.imageSource} btnClass={item.btnClass} />)}
+            {itemsArray.map((item, index) => <CardContact key={index} name={item.username} email={item.email} number={item.phone} type={item.gender} imageSource={item.image} btnClass={item.btnClass} />)}
+
 
         </aside>
         // {/* <!-- second section end  --> */}

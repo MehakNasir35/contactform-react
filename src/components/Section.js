@@ -11,25 +11,25 @@ export function Section(props) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [number, setPhone] = useState('');
-    const [type, setType] = useState('Personal');
+    const [type, setType] = useState('male');
     const [imageSource] = useState(`${pic4}`);
     const [btnClass, setButtonClass] = useState("primary");
 
     const handleClickEvent = () => {
         let details = {
-            "name": name,
+            "username": name,
             "email": email,
-            "number": number,
+            "phone": number,
             "btnClass": btnClass,
-            "type": type,
-            "imageSource": imageSource,
+            "gender": type,
+            "image": imageSource,
         }
         props.handleClickEvent(details)
     }
 
     const typeChange = (e) => {
         setType(e.currentTarget.value);
-        if (e.currentTarget.value === "Professional")
+        if (e.currentTarget.value === "female")
             setButtonClass("success")
     }
 
@@ -74,8 +74,8 @@ export function Section(props) {
                         <Input
                             type="radio"
                             name="radio1"
-                            value="Professional"
-                            onChange={typeChange} /> Professional
+                            value="female"
+                            onChange={typeChange} /> female
                     </Label>
                 </FormGroup>
                 <FormGroup check inline>
@@ -83,10 +83,10 @@ export function Section(props) {
                         <Input
                             type="radio"
                             name="radio1"
-                            value="Personal"
+                            value="male"
                             checked
                             onChange={typeChange}
-                        /> Personal
+                        /> male
                     </Label>
                 </FormGroup>
                 {/* <!-- radio button 2 div end --> */}

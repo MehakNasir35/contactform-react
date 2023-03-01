@@ -8,7 +8,6 @@ import { faEnvelopeOpen, faPhone } from '@fortawesome/free-solid-svg-icons'
 
 export function CardContact(props) {
     return (
-        <>
             <Card className="my-2 bg-light">
                 <CardBody>
                     <Row>
@@ -37,6 +36,5 @@ export function CardContact(props) {
                     </Row>
                 </CardBody>
             </Card>
-        </>
     )
 }

@@ -6,10 +6,8 @@ import { CardContact } from "./CardContact"
 export function Main() {
 
     const [item, setItem] = useState();
-    const [showCard, setShowCard] = useState(false);
 
     const handleClickEvent = (details) => {
-        setShowCard(true)
         setItem(details)
     }
 
