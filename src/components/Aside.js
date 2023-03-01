@@ -44,6 +44,7 @@ export function Aside() {
             {/* cards array map */}
             {cardDetailsArray.map(item => <CardContact key={item.id} name={item.name} email={item.email} number={item.number} type={item.type} imageSource={item.imageSource} btnClass={item.btnClass} />)}
 
+
         </aside>
         // {/* <!-- second section end  --> */}
     )

@@ -1,6 +1,6 @@
 import addImage from "../images/addimage.jpg"
 import { CardContact } from "./CardContact"
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import pic4 from '../images/pic4.png';
 
 import {
@@ -8,33 +8,46 @@ import {
 } from 'reactstrap';
 
 export function Section() {
-    const contactForm = useRef(null);
+
+    const details ={}
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [number, setPhone] = useState('');
-    const [type, setGender] = useState('');
+    const [type, setType] = useState('');
     const [imageSource, setImage] = useState('');
     const [btnClass, setButtonClass] = useState('');
     const [showCard, setShowCard] = useState(false)
 
     const handleClickEvent = () => {
-        const form = contactForm.current
-        setName(`${form['name'].value}`);
-        setEmail(`${form['email'].value}`);
-        setPhone(`${form['number'].value}`);
-        setGender("Professional");
         setImage(`${pic4}`);
-        setButtonClass('success');
+        setButtonClass("primary")
+        if (type == "Professional")
+            setButtonClass("success")
+
+        details = {
+            "name": name,
+            "email": email,
+            "number": number,
+            "btnClass": btnClass,
+            "type": type,
+            "imageSource": imageSource,
+        }
+
         setShowCard(true)
     }
+
+    const typeChange = (e) => {
+        setType(e.currentTarget.value);
+    }
+
     return (
         /* <!-- first section start -->
   <!-- naming first column as section --> */
         <section className="col-12 col-md-6 col-lg-6">
             {/* <!-- mid heading --> */}
             <h3 className="text-center mt-3 text-primary">Add Contact</h3>
-            <form ref={contactForm}>
+            <form>
                 {/* <!-- input fields start --> */}
 
                 <Input
@@ -42,32 +55,45 @@ export function Section() {
                     type='text'
                     name={'name'}
                     placeholder="Name"
+                    onChange={e => setName(e.target.value)}
                 />
                 <Input
                     className="mb-1"
                     type='email'
                     name={'email'}
                     placeholder="Email"
+                    onChange={e => setEmail(e.target.value)}
                 />
                 <Input
                     className="mb-1"
                     type='tel'
                     name={'number'}
                     placeholder="Number"
+                    onChange={e => setPhone(e.target.value)}
+
                 />
                 {/* <!-- input fields end --> */}
 
                 {/* <!-- heading --> */}
                 <h5 className="font-weight-bold mt-3">Contact Type</h5>
                 {/* <!-- radio button 1 div start --> */}
-                <FormGroup  check inline>
+                <FormGroup check inline>
                     <Label check>
-                        <Input type="radio" name="radio1"  /> Professional
+                        <Input
+                            type="radio"
+                            name="radio1"
+                            value="Professional"
+                            onChange={typeChange} /> Professional
                     </Label>
                 </FormGroup>
                 <FormGroup check inline>
                     <Label check>
-                        <Input type="radio" name="radio1" /> Personal
+                        <Input
+                            type="radio"
+                            name="radio1"
+                            value="Personal"
+                            onChange={typeChange}
+                        /> Personal
                     </Label>
                 </FormGroup>
                 {/* <!-- radio button 2 div end --> */}
@@ -88,7 +114,7 @@ export function Section() {
             </form>
 
             {/* if showcard is true, show card */}
-            {showCard && <CardContact name={name} email={email} number={number} type={type} imageSource={imageSource} btnClass={btnClass} />}
+            {showCard && <CardContact name={details.name} email={email} number={number} type={type} imageSource={imageSource} btnClass={btnClass} />}
 
         </section>
     )
