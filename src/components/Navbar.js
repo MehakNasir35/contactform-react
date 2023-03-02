@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressCard, faSignOut } from '@fortawesome/free-solid-svg-icons'
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Navbar,
     NavbarBrand,
@@ -9,7 +9,6 @@ import {
 } from 'reactstrap';
 
 export function NavBar(props) {
-    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div>

@@ -1,7 +1,4 @@
 import { CardContact } from "./CardContact"
-import pic1 from '../images/pic1.png';
-import pic2 from '../images/pic2.png';
-import pic3 from '../images/pic3.png';
 import React, { useEffect, useState } from "react";
 
 import {
@@ -11,21 +8,39 @@ import {
 export function Aside(props) {
 
     const [itemsArray, setItemArray] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItemIndex, setSelectedItemIndex] = useState(null);
 
     const remove = (index) => {
         var newArray = [...itemsArray]
-        newArray.splice(index,1);
+        newArray.splice(index, 1);
         setItemArray(newArray)
     }
 
     const update = (index) => {
-       console.log(index)
+        setSelectedItemIndex(index)
+        setSelectedItem(itemsArray[index])
     }
 
     useEffect(() => {
+        props.updateItem(selectedItem)
+    }, [selectedItem])
+
+    useEffect(() => {
         if (props.item) {
-            var newArray = [...itemsArray, props.item]
-            setItemArray(newArray)
+            if (selectedItemIndex != null) {
+
+                var replaceItem = props.item
+                replaceItem.id = selectedItem.id
+
+                var newArray = [...itemsArray]
+                newArray[selectedItemIndex] = replaceItem
+                setItemArray(newArray)
+
+            } else {
+                var newArray = [...itemsArray, props.item]
+                setItemArray(newArray)
+            }
         }
     }, [props.item]);
 
@@ -57,6 +72,7 @@ export function Aside(props) {
                 <CardContact
                     key={item.id}
                     remove={remove}
+                    update={update}
                     index={index}
                     name={item.username}
                     email={item.email}

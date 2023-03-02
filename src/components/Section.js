@@ -1,5 +1,5 @@
 import addImage from "../images/addimage.jpg"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import pic4 from '../images/pic4.png';
 
 import {
@@ -14,9 +14,12 @@ export function Section(props) {
     const [type, setType] = useState('male');
     const [imageSource] = useState(`${pic4}`);
     const [btnClass, setButtonClass] = useState("primary");
+    const [isEdit, setIsEdit] = useState(false);
 
-    const handleClickEvent = () => {
+
+    const submitEvent = () => {
         let details = {
+            "id": 0,
             "username": name,
             "email": email,
             "phone": number,
@@ -24,13 +27,31 @@ export function Section(props) {
             "gender": type,
             "image": imageSource,
         }
-        props.handleClickEvent(details)
+        refreshField()
+
+        props.submitEvent(details)
     }
 
     const typeChange = (e) => {
         setType(e.currentTarget.value);
         if (e.currentTarget.value === "female")
             setButtonClass("success")
+    }
+
+    useEffect(() => {
+        if (props.selectedItem) {
+            setIsEdit(true)
+            setName(props.selectedItem.username)
+            setEmail(props.selectedItem.email)
+            setPhone(props.selectedItem.phone)
+        }
+    }, [props.selectedItem])
+
+    const refreshField = () => {
+        setIsEdit(false)
+        setName('')
+        setEmail('')
+        setPhone('')
     }
 
     return (
@@ -46,6 +67,7 @@ export function Section(props) {
                     className="mb-1"
                     type='text'
                     name={'name'}
+                    value={name}
                     placeholder="Name"
                     onChange={e => setName(e.target.value)}
                 />
@@ -53,6 +75,7 @@ export function Section(props) {
                     className="mb-1"
                     type='email'
                     name={'email'}
+                    value={email}
                     placeholder="Email"
                     onChange={e => setEmail(e.target.value)}
                 />
@@ -61,6 +84,7 @@ export function Section(props) {
                     type='tel'
                     name={'number'}
                     placeholder="Number"
+                    value={number}
                     onChange={e => setPhone(e.target.value)}
 
                 />
@@ -97,12 +121,14 @@ export function Section(props) {
                 <input type="file" className="mb-1" />
                 <div>
                     <Button
-                        onClick={handleClickEvent}
+                        onClick={submitEvent}
                         block
-                        color="primary"
+                        color={isEdit ? 'warning' : 'primary'}
                     >
-                        Add Contact
+                        {isEdit ? 'Edit Contact' : 'Add Contact'}
                     </Button>
+
+
                 </div>
             </form>
 
