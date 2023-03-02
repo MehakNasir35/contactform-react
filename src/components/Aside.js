@@ -8,32 +8,19 @@ import {
     Input
 } from 'reactstrap';
 
-var cardDetailsArray = [{
-    "name": "Erafi Ahonaf",
-    "email": "erafi@gmail.com",
-    "number": "01875510966",
-    "btnClass": "success",
-    "type": "Professional",
-    "imageSource": pic2,
-}, {
-    "name": "Ishan Sarkar",
-    "email": "ishan@gmail.com",
-    "number": "01719058105",
-    "btnClass": "primary",
-    "type": "Personal",
-    "imageSource": pic1,
-}, {
-    "name": "John Doe",
-    "email": "jdoe@gmail.com",
-    "number": "01875510966",
-    "btnClass": "success",
-    "type": "Professional",
-    "imageSource": pic3,
-}]
-
 export function Aside(props) {
 
-    const [itemsArray, setItemArray] = useState(cardDetailsArray);
+    const [itemsArray, setItemArray] = useState([]);
+
+    const remove = (index) => {
+        var newArray = [...itemsArray]
+        newArray.splice(index,1);
+        setItemArray(newArray)
+    }
+
+    const update = (index) => {
+       console.log(index)
+    }
 
     useEffect(() => {
         if (props.item) {
@@ -48,7 +35,7 @@ export function Aside(props) {
             // after getting users, parse to json 
             .then(res => res.json())
             // after parsing result, call set card details function
-            .then(data=> setItemArray(data.users))
+            .then(data => setItemArray(data.users))
             .catch((error) => {
                 console.log(error)
             });
@@ -66,8 +53,18 @@ export function Aside(props) {
             />
 
             {/* cards array map */}
-            {itemsArray.map((item, index) => <CardContact key={index} name={item.username} email={item.email} number={item.phone} type={item.gender} imageSource={item.image} btnClass={item.btnClass} />)}
-
+            {itemsArray.map((item, index) =>
+                <CardContact
+                    key={item.id}
+                    remove={remove}
+                    index={index}
+                    name={item.username}
+                    email={item.email}
+                    number={item.phone}
+                    type={item.gender}
+                    imageSource={item.image}
+                    btnClass={item.btnClass}
+                />)}
 
         </aside>
         // {/* <!-- second section end  --> */}

@@ -16,7 +16,6 @@ export function Main() {
         <div className="container-fluid row m-0">
             <Section handleClickEvent={handleClickEvent} />
             <Aside item={item} />
-
         </div>
 
     )

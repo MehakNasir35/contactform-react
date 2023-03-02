@@ -11,8 +11,6 @@ import {
 export function NavBar(props) {
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggle = () => setIsOpen(!isOpen);
-
     return (
         <div>
             <Navbar {...props}>
