@@ -35,8 +35,9 @@ export function Aside(props) {
 
                 var newArray = [...itemsArray]
                 newArray[selectedItemIndex] = replaceItem
+                
                 setItemArray(newArray)
-
+                setSelectedItemIndex(null)
             } else {
                 var newArray = [...itemsArray, props.item]
                 setItemArray(newArray)
